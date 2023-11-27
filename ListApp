@@ -1,0 +1,52 @@
+
+
+//Java code to print the elements of Stream 
+
+/*import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.*; 
+
+
+		public class ListApp {
+		    public static void main(String[] args) {
+		    	int[] arr = {1, 3, 4, 2, 3, 4, 2, 6, 5};
+		        String output = countElements(arr);
+		        System.out.println(output);
+		    }
+
+		    public static String countElements(int[] arr) {
+		        Map<Integer, Long> elementCounts = Arrays.stream(arr)
+		            .boxed()
+		            .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+
+		        return elementCounts.entrySet().stream()
+		            .map(entry -> entry.getKey() + "-" + entry.getValue())
+		            .collect(Collectors.joining(" "));
+		    }
+		}*/
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class ListApp {
+    public static void main(String[] args) {
+        List<String> sentences = Arrays.asList(
+            "This is a sample sentence.",
+            "Another sample sentence.",
+            "This is a sample sentence.",
+            "Yet another sentence.",
+            "This is a sample sentence.","Yet another sentence."
+        );
+
+        // Use Java 8 streams to count repeated sentences
+        Map<String, Long> sentenceCounts = sentences.stream()
+            .collect(Collectors.groupingBy(sentence -> sentence, Collectors.counting()));
+
+        // Print the repeated sentences and their counts
+        sentenceCounts.entrySet().stream()
+            .filter(entry -> entry.getValue() > 1)
+            .forEach(entry -> System.out.println("Sentence: " + entry.getKey() + ", Count: " + entry.getValue()));
+    }
+}
